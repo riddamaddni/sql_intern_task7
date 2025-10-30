@@ -1,0 +1,57 @@
+Task 7: Interview Questions - SQL Views
+
+1. What is a view?
+A view is a "virtual table" whose content is defined by a SELECT query. It doesn't store data itself; instead, it stores the query logic. When you query a view, the database executes this stored query to generate the results.
+
+2. Can we update data through a view?
+Yes, but with significant limitations. A view is generally updatable (you can use INSERT, UPDATE, or DELETE on it) only if it is "simple" enough. This typically means:
+
+It's based on a single table.
+
+It doesn't use aggregate functions (SUM, COUNT, etc.).
+
+It doesn't use GROUP BY, DISTINCT, or joins.
+
+It includes all NOT NULL columns from the base table that don't have default values.
+
+3. What is a materialized view?
+A materialized view is a "physical" view. Unlike a regular view (which is just a stored query), a materialized view stores the results of the query as a physical table on disk. Its data is static and must be "refreshed" periodically. The benefit is much faster query performance since the complex query doesn't need to run every time it's accessed.
+
+4. Difference between view and table?
+
+Table: A physical database object that stores data.
+
+View: A virtual object that stores a SELECT query. It does not store data itself (unless it's a materialized view).
+
+Storage: Tables consume disk space for data; views only consume a small amount of space for their definition.
+
+Data Source: A table is the source of data. A view derives its data from one or more tables.
+
+5. How to drop a view?
+You can delete a view using the DROP VIEW command, followed by the view's name.
+DROP VIEW view_name;
+(A safer command is DROP VIEW IF EXISTS view_name;)
+
+6. Why use views?
+There are two primary reasons:
+
+Simplicity: They hide complex logic. You can write a difficult 5-table join with aggregations once, save it as a view, and then let users run simple queries like SELECT * FROM MyComplexView;.
+
+Security: They restrict data access. You can create a view that only shows certain columns (e.g., hiding salaries) or certain rows (e.g., only showing data for a specific sales region). You then give users permission to the view, not the base tables.
+
+7. Can we create indexed views?
+Yes, in some database systems (like SQL Server). An indexed view is a materialized view. When you create a unique clustered index on a view, the view's result set is physically stored in the database, just like a table. This can dramatically improve performance for complex aggregation queries.
+
+8. How to secure data using views?
+Views act as a security layer. You can create a view that shows only "public" columns and hides sensitive ones (e.g., EmployeeView shows names and departments but hides salaries and home addresses). You then grant SELECT permission on the view to a user, but deny permission to the underlying Employee table. The user can only see the data you've exposed.
+
+9. What are limitations of views?
+
+Performance: A view that runs a very complex query will be slow every time you access it (unless it's materialized/indexed).
+
+Updatability: As mentioned, most complex views (with joins, GROUP BY, etc.) are read-only.
+
+Dependency: Views depend on their underlying tables. If you DROP a table or column that a view uses, the view will become invalid and stop working.
+
+10. How does WITH CHECK OPTION work?
+WITH CHECK OPTION is a security constraint for updatable views. It enforces the view's WHERE clause for all INSERT and UPDATE operations. If you try to UPDATE a row in a way that would make it "disappear" from the view, the WITH CHECK OPTION will block the change and return an error.
