@@ -1,0 +1,37 @@
+Task 5 Summary
+
+In this task, I created a new database for a fictional pharmaceutical sales company, "PharmaPlus," to serve as a practical example for learning SQL joins.
+
+This database consists of four tables:
+
+SalesReps
+
+Products
+
+Customers
+
+Sales
+
+I populated these tables with sample data, including strategic edge cases like a sales rep with no sales (Sunita Sharma), a product that has never been sold (Glimenclamide), and a customer with no purchases (Wellness Forever). These cases are essential for clearly demonstrating the difference between INNER, LEFT, RIGHT, and FULL joins.
+
+The main file, task_5_joins.sql, is structured as a "level-up" learning guide. It starts with the schema creation and data insertion, then progresses through a series of join examples, from the most basic INNER JOIN to more complex topics.
+
+The guide covers:
+
+Level 1: INNER JOIN (Finding matches)
+
+Level 2: LEFT JOIN (Showing all reps, even those with no sales)
+
+Level 3: RIGHT JOIN (Showing all products, even those unsold)
+
+Level 4: FULL OUTER JOIN (Including the emulation for MySQL/SQLite)
+
+Level 5: Multi-Table Joins (Creating a full report by chaining joins)
+
+Level 6: CROSS JOIN (Creating a Cartesian product)
+
+Level 7: SELF JOIN (Finding reps in the same region)
+
+This practical guide also serves to demonstrate the concepts from the interview questions (e.g., self-joins, cross-joins, joining more than 2 tables).
+
+Finally, I created separate files (task_5_interview_answers.md and readme.md) to provide the specific deliverables requested.
